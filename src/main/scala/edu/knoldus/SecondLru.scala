@@ -21,12 +21,12 @@ class LRUCache(capacity: Int, hashSet: mutable.LinkedHashSet[String]) {
   }
 }
 
-object LRUCacheset {
+object LRUCache {
   def apply(capacity: Int): LRUCache = new LRUCache(capacity, mutable.LinkedHashSet.empty[String])
 }
 
 object DriveLru extends App {
-  val lruCache = LRUCacheset(5)
+  val lruCache = LRUCache(3)
   println(lruCache.checkPage("a"))
   println(lruCache.checkPage("b"))
   println(lruCache.checkPage("c"))
