@@ -11,31 +11,31 @@ class TreeNodeCount {
     }
   }
 
-  def countNodes2(tree: Tree, children: Int): Int = {
-    def countNodesWithChildrenGreaterSpecificNumber(tree: Tree, noOfChildren: Int): Option[Int] = {
-      if (tree.children.getOrElse(List.empty[Int]).size > noOfChildren) {
+  def countNodes2(tree: Tree): Int = {
+    def countNodesWithChildrenGreaterThanTwo(tree: Tree): Option[Int] = {
+      if (tree.children.getOrElse(List.empty[Int]).size > 2) {
         tree.children.map { child =>
-          child.foldLeft(1)((x, y) => x + countNodesWithChildrenGreaterSpecificNumber(y, noOfChildren).getOrElse(0))
+          child.foldLeft(1)((x, y) => x + countNodesWithChildrenGreaterThanTwo(y).getOrElse(0))
         }
       }
       else {
         tree.children map { child =>
-          child.foldLeft(0)((x, y) => x + countNodesWithChildrenGreaterSpecificNumber(y, noOfChildren).getOrElse(0))
+          child.foldLeft(0)((x, y) => x + countNodesWithChildrenGreaterThanTwo(y).getOrElse(0))
         }
       }
     }
 
-    val count = countNodesWithChildrenGreaterSpecificNumber(tree, children)
+    val count = countNodesWithChildrenGreaterThanTwo(tree)
     count.getOrElse(0)
   }
 }
 
 
 object Driver extends App {
-  val treeCount = new TreeNodeCount
+  val treeCount = new TreeNodeCount()
 
   val treeOne = Tree(3,Some(List(Tree(9,None),Tree(7,None),Tree(6,None))))
 
   val tree2 = Tree(5,Some(List(treeOne,treeOne,Tree(8,Some(List(treeOne,treeOne))))))
-  println(treeCount.countNodes(tree2))
+  println(treeCount.countNodes(treeOne))
 }
