@@ -18,14 +18,14 @@ object NAryTree {
    */
   def countAllNode(tree: NaryTree): Int = tree match {
     case Leaf(_) => 1
-    case Node(_, nodes @ _*) => {
+    case Node(_, nodes @ _*) =>
       1 + nodes.map(countAllNode).sum
-    }
   }
+
 
   /***
    * Method calculate nodes recursively
-   * @param Tree
+   * @param tree
    * @return No of nodes having more than one child
    */
   def countNodeChild(tree: NaryTree): Int = tree match {
